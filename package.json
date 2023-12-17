@@ -1,0 +1,22 @@
+{
+  "name": "simple-pages-blog",
+  "version": "1.0.0",
+  "description": "Write markup and have it compiled by cloudflare pages with nice styling via css",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": ".\\"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "Peter Hindes",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "showdown": "^2.1.0"
+  }
+}
