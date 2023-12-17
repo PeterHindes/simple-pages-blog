@@ -21,8 +21,18 @@ traverseDir('articles', (filePath) => {
     if (path.extname(filePath) === '.md') {
         let text = fs.readFileSync(filePath, 'utf8');
         let html = converter.makeHtml(text);
-        let date = path.dirname(filePath).split(path.sep).slice(-3); // extract date from file path
-        articles.push({ date, content: `<div>${html}</div>` });
+        // let date = path.dirname(filePath).split(path.sep).slice(-3).join('-'); // extract date from file path
+        dateParts = filePath.split(path.sep).slice();
+        console.log(dateParts);
+        let year = dateParts[1];
+        let month = dateParts[2];
+        let day = dateParts[3];
+        let date = `${day}-${month}-${year}`;
+        console.log(filePath);
+        console.log(date);
+        let dateHtml = `<h4 class="article-date">${date}</h4>`;
+        html = html.replace(/<h1>/, `${dateHtml}<h1>`);
+        articles.push({ date: date.split('-'), content: `<div>${html}</div>` });
     }
 });
 
