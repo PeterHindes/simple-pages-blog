@@ -1,12 +1,39 @@
+/* preahvihear-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Preahvihear';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/preahvihear-v29-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* cairo-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/cairo-v28-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* rubik-doodle-shadow-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Rubik Doodle Shadow';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/rubik-doodle-shadow-v1-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
 body {
     background-color: rgb(26, 26, 45);
     color: bisque;
     margin: 0;
     padding: 0;
-}
+    font-family: 'Preahvihear', normal;
 h1 {
     color: rgb(135, 214, 90);
     margin-bottom: 0;
+    font-family: 'Cairo', normal;
 }
 .article-date {
     color: rgb(159, 212, 128);
@@ -14,6 +41,7 @@ h1 {
 }
 h2 {
     color: rgb(255, 202, 138);
+    font-family: 'Cairo', normal;
 }
 
 #header {
@@ -26,12 +54,12 @@ h2 {
 }
 #header-title {
     font-size: 40px;
+    font-family: 'Rubik Doodle Shadow', normal;
     margin: 0;
     padding: 0;
     padding-left: 25px;
     padding-right: 25px;
-    /* underline */
-    text-decoration: underline;
+    /* text-decoration: underline; */
     position: absolute;
     left: 0;
     bottom: 0px;
@@ -47,7 +75,7 @@ h2 {
 #header-fork img {
     height: 150px;
 }
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 600px) {
     #header-fork {
         display: none;
     }

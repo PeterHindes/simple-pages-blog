@@ -62,4 +62,5 @@ indexHtml = indexHtml.replace(/\n/g, '').replace(/ +/g, ' ');
 console.log(indexHtml);
 indexHtml = indexHtml.replace('<!-- placeholder -->', articlesHtml);
 indexHtml = indexHtml.replace('/*insert style*/', fs.readFileSync('src/site-skeleton/style.css', 'utf8')).replace(/\n/g, '').replace(/ +/g, ' ');
+fs.rmSync('public/style.css');
 fs.writeFileSync('public/index.html', indexHtml);
