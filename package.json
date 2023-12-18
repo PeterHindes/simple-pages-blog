@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node src/build.js",
+    "preview": "wrangler pages dev public",
+    "qpreview": "http-server ./public",
     "dev": "watch 'npm run build; http-server ./public' src"
   },
   "repository": {

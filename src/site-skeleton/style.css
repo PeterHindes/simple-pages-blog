@@ -6,6 +6,14 @@ body {
 }
 h1 {
     color: rgb(135, 214, 90);
+    margin-bottom: 0;
+}
+.article-date {
+    color: rgb(159, 212, 128);
+    margin-top: 0;
+}
+h2 {
+    color: rgb(255, 202, 138);
 }
 
 #header {

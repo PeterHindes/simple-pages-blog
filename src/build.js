@@ -31,7 +31,7 @@ traverseDir('articles', (filePath) => {
         // console.log(date);
         let dateHtml = `<h4 class="article-date">${date}</h4>`;
         // console.log(dateHtml);
-        html = html.replace(/<\/h1>/, `<\h1>${dateHtml}`);
+        html = html.replace(/<\/h1>/, `</h1>${dateHtml}`);
         console.log("Date:",date,": ",html);
         articles.push({ date: date.split('-'), content: `<div>${html}</div>` });
     }
