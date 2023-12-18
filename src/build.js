@@ -23,15 +23,16 @@ traverseDir('articles', (filePath) => {
         let html = converter.makeHtml(text);
         // let date = path.dirname(filePath).split(path.sep).slice(-3).join('-'); // extract date from file path
         dateParts = filePath.split(path.sep).slice();
-        console.log(dateParts);
         let year = dateParts[1];
         let month = dateParts[2];
-        let day = dateParts[3];
+        let day = dateParts[3].split('.')[0];
         let date = `${day}-${month}-${year}`;
-        console.log(filePath);
-        console.log(date);
+        // console.log(filePath);
+        // console.log(date);
         let dateHtml = `<h4 class="article-date">${date}</h4>`;
-        html = html.replace(/<h1>/, `${dateHtml}<h1>`);
+        // console.log(dateHtml);
+        html = html.replace(/<\/h1>/, `<\h1>${dateHtml}`);
+        console.log("Date:",date,": ",html);
         articles.push({ date: date.split('-'), content: `<div>${html}</div>` });
     }
 });
