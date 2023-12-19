@@ -29,12 +29,14 @@ traverseDir('articles', (filePath) => {
         let date = `${day}-${month}-${year}`;
         let dateHtml = `<h4 class="article-date">${date}</h4>`;
         html = html.replace(/<\/h1>/, `</h1>${dateHtml}`);
-        articles.push({ date: date.split('-'), content: `<div>${html}</div>` });
+        articles.push({ date: date.split('-'), content: `<div class="article">${html}</div>` });
     }
 });
 
-// Sort articles in descending order of date
-articles.sort((a, b) => b.date.join('') - a.date.join(''));
+// Sort articles in ascending order of date
+articles.sort((a, b) => a.date.join('') - b.date.join(''));
+// add the id of "latest" to the last div in the list
+articles[articles.length - 1].content = articles[articles.length - 1].content.replace("<div class=\"article\">", "<div class=\"article\" id=\"latest\">");
 
 // copy the folder src/site-skeleton to public
 function copyDir(src, dest) {
@@ -59,7 +61,6 @@ copyDir('src/site-skeleton', 'public');
 let indexHtml = fs.readFileSync('public/index.html', 'utf8');
 let articlesHtml = articles.map(article => article.content).join('\n');
 indexHtml = indexHtml.replace(/\n/g, '').replace(/ +/g, ' ');
-console.log(indexHtml);
 indexHtml = indexHtml.replace('<!-- placeholder -->', articlesHtml);
 indexHtml = indexHtml.replace('/*insert style*/', fs.readFileSync('src/site-skeleton/style.css', 'utf8')).replace(/\n/g, '').replace(/ +/g, ' ');
 fs.rmSync('public/style.css');
