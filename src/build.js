@@ -60,8 +60,10 @@ copyDir('src/site-skeleton', 'public');
 // Insert articles into index.html
 let indexHtml = fs.readFileSync('public/index.html', 'utf8');
 let articlesHtml = articles.map(article => article.content).join('\n');
-indexHtml = indexHtml.replace(/\n/g, '').replace(/ +/g, ' ');
+// indexHtml = indexHtml.replace(/\n/g, '').replace(/ +/g, ' ');
 indexHtml = indexHtml.replace('<!-- placeholder -->', articlesHtml);
-indexHtml = indexHtml.replace('/*insert style*/', fs.readFileSync('src/site-skeleton/style.css', 'utf8')).replace(/\n/g, '').replace(/ +/g, ' ');
+indexHtml = indexHtml.replace('/*insert style*/', fs.readFileSync('src/site-skeleton/style.css', 'utf8'))
+    // .replace(/\n/g, '').replace(/ +/g, ' ')
+    ;
 fs.rmSync('public/style.css');
 fs.writeFileSync('public/index.html', indexHtml);
