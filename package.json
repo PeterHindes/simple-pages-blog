@@ -7,7 +7,8 @@
     "build": "node src/build.js",
     "preview": "wrangler pages dev public",
     "qpreview": "http-server ./public",
-    "dev": "watch 'npm run build && http-server ./public' src"
+    "onedev": "npm run build && http-server ./public",
+    "dev": "watch 'npm run onedev' src"
   },
   "keywords": [
     "blog"
