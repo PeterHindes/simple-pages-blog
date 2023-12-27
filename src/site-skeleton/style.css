@@ -124,6 +124,7 @@ h2 {
     width: 100%;
     display: flex;
     justify-content: center;
+    overflow-x: hidden;
 }
 
 #articles {
@@ -164,15 +165,9 @@ h2 {
 }
 
 .img-wrap {
-    /* width: calc(100vw - 40px - 60px);
-    max-height: 80vh;
-    overflow: hidden; */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding-bottom: 30px;
-    padding-right: 30px;
-    transform: translate(30px, 10px) scale(1.05); */
 }
 
 .article-img {
