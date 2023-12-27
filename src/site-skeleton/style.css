@@ -31,12 +31,6 @@
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-html,
-body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
 :root {
     scrollbar-color: transparent transparent;
 }
@@ -60,6 +54,13 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Preahvihear', normal;
+    height: 100vh;
+    width: 100vw;
+}
+html {
+    scroll-behavior: smooth;
+    height: 100vh;
+    width: 100vw;
 }
 
 h1 {
@@ -123,8 +124,6 @@ h2 {
     width: 100%;
     display: flex;
     justify-content: center;
-    /* Add this line to center the content */
-
 }
 
 #articles {
@@ -146,6 +145,10 @@ h2 {
     justify-content: center;
     align-items: center;
 }
+#footer a{
+    color: rgb(159, 212, 128);
+    text-decoration: none;
+}
 
 #jtlbutton {
     font-family: Cairo, normal;
@@ -161,15 +164,15 @@ h2 {
 }
 
 .img-wrap {
-    width: calc(100vw - 40px - 60px);
+    /* width: calc(100vw - 40px - 60px);
     max-height: 80vh;
-    overflow: hidden;
+    overflow: hidden; */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 30px;
+    /* padding-bottom: 30px;
     padding-right: 30px;
-    transform: translate(30px, 10px) scale(1.05);
+    transform: translate(30px, 10px) scale(1.05); */
 }
 
 .article-img {
