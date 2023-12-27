@@ -29,6 +29,7 @@ traverseDir('articles', (filePath) => {
         let date = `${day}-${month}-${year}`;
         let dateHtml = `<h4 class="article-date">${date}</h4>`;
         html = html.replace(/<\/h1>/, `</h1>${dateHtml}`);
+        html = html.replace(/<img src="(.*)" .*>/g, '<div class="img-wrap"><img src="$1" class="article-img" $2></div>');
         articles.push({ date: date.split('-'), content: `<div class="article">${html}</div>` });
     }
 });

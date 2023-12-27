@@ -31,6 +31,28 @@
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+:root {
+    scrollbar-color: transparent transparent;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
 
 body {
     background-color: rgb(26, 26, 45);
@@ -138,10 +160,21 @@ h2 {
     background-color: rgb(159, 212, 128);
 }
 
-img {
-    width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: 6px;
-    box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.5);
+.img-wrap {
+    width: calc(100vw - 40px - 60px);
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-right: 30px;
+    transform: translate(30px, 10px) scale(1.05);
+}
+
+.article-img {
+    max-height: 80vh;
+    max-width: calc(100vw - 40px - 60px);
+    border-radius: 12px;
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.4);
 }
