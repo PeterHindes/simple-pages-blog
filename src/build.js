@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const showdown  = require('showdown');
+const showdown = require('showdown');
+const gulp = require('gulp');
+const squoosh = require('gulp-libsquoosh');
 const converter = new showdown.Converter();
 
-let articles = [];
 
+let articles = [];
 
 function traverseDir(dir, callback) {
     fs.readdirSync(dir).forEach(file => {
@@ -29,7 +31,7 @@ traverseDir('articles', (filePath) => {
         let date = `${day}-${month}-${year}`;
         let dateHtml = `<h4 class="article-date">${date}</h4>`;
         html = html.replace(/<\/h1>/, `</h1>${dateHtml}`);
-        html = html.replace(/<img src="(.*)" .*>/g, '<div class="img-wrap"><img src="$1" class="article-img" $2></div>');
+        html = html.replace(/<img src="(.*)" .*>/g, '<div class="img-wrap"><img src="$1" class="article-img" loading="lazy" $2></div>');
         articles.push({ date: date.split('-'), content: `<div class="article">${html}</div>` });
     }
 });
@@ -40,26 +42,40 @@ articles.sort((a, b) => a.date.join('') - b.date.join(''));
 articles[articles.length - 1].content = articles[articles.length - 1].content.replace("<div class=\"article\">", "<div class=\"article\" id=\"latest\">");
 
 // copy the folder src/site-skeleton to public
-function copyDir(src, dest) {
-    // delete the old public folder if it exists
-    if (fs.existsSync(dest)) {
-        fs.rmSync(dest, { recursive: true });
-    }
-    fs.mkdirSync(dest);
-    fs.readdirSync(src).forEach(file => {
-        let srcPath = path.join(src, file);
-        let destPath = path.join(dest, file);
-        if (fs.lstatSync(srcPath).isDirectory()) {
-            copyDir(srcPath, destPath);
-        } else {
-            fs.copyFileSync(srcPath, destPath);
-        }
-    });
-}
+// function copyDir(src, dest) {
+//     // delete the old public folder if it exists
+//     if (fs.existsSync(dest)) {
+//         fs.rmSync(dest, { recursive: true });
+//     }
+//     fs.mkdirSync(dest);
+//     fs.readdirSync(src).forEach(file => {
+//         let srcPath = path.join(src, file);
+//         let destPath = path.join(dest, file);
+//         if (fs.lstatSync(srcPath).isDirectory()) {
+//             copyDir(srcPath, destPath);
+//         } else {
+//             fs.copyFileSync(srcPath, destPath);
+//         }
+//     });
+// }
 // copyDir('src/site-skeleton', 'public');
 // just copy index.html
+fs.rmSync('public', { recursive: true });
+fs.mkdirSync('public');
 fs.copyFileSync('src/site-skeleton/index.html', 'public/index.html');
-copyDir('img', 'public/img')
+// copyDir('img', 'public/img')
+fs.mkdirSync('public/img');
+gulp.task('squoosh', () => {
+    return gulp.src('img/*.{png,jpg,avif}')
+        .pipe(squoosh({
+            oxipng: {},
+            webp: {},
+            avif: {},
+            mozjpg: {},
+        })
+            .pipe(dest('public/img')),
+        );
+});
 
 // Insert articles into index.html
 let indexHtml = fs.readFileSync('public/index.html', 'utf8');
