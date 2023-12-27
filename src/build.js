@@ -55,7 +55,10 @@ function copyDir(src, dest) {
         }
     });
 }
-copyDir('src/site-skeleton', 'public');
+// copyDir('src/site-skeleton', 'public');
+// just copy index.html
+fs.copyFileSync('src/site-skeleton/index.html', 'public/index.html');
+copyDir('img', 'public/img')
 
 // Insert articles into index.html
 let indexHtml = fs.readFileSync('public/index.html', 'utf8');
@@ -65,5 +68,4 @@ indexHtml = indexHtml.replace('<!-- placeholder -->', articlesHtml);
 indexHtml = indexHtml.replace('/*insert style*/', fs.readFileSync('src/site-skeleton/style.css', 'utf8'))
     // .replace(/\n/g, '').replace(/ +/g, ' ')
     ;
-fs.rmSync('public/style.css');
 fs.writeFileSync('public/index.html', indexHtml);

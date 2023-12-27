@@ -142,4 +142,6 @@ img {
     width: 90vw;
     max-height: 90vh;
     object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.5);
 }
