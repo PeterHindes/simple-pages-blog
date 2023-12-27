@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peter's Journal</title>
     <style>/*insert style*/</style>
+    <script>
+        window.onload = function () {
+            // If we scroll to #latest then hide the button
+            function updateFooter() {
+                if(window.location.hash == '#latest') {
+                    document.getElementById("footer").style.display = 'none';
+                }
+            }
+            window.onhashchange = updateFooter;
+            updateFooter();
+        }
+    </script>
 </head>
 <body>
     <div id="header">
