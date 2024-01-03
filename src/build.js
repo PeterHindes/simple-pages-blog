@@ -41,10 +41,6 @@ articles[articles.length - 1].content = articles[articles.length - 1].content.re
 
 // copy the folder src/site-skeleton to public
 function copyDir(src, dest) {
-    // delete the old public folder if it exists
-    if (fs.existsSync(dest)) {
-        fs.rmSync(dest, { recursive: true });
-    }
     fs.mkdirSync(dest);
     fs.readdirSync(src).forEach(file => {
         let srcPath = path.join(src, file);
@@ -57,12 +53,16 @@ function copyDir(src, dest) {
     });
 }
 // copyDir('src/site-skeleton', 'public');
+if (fs.existsSync('public')) {
+    fs.rmSync('public', { recursive: true });
+}
 fs.mkdirSync('public');
 // just copy index.html
 fs.copyFileSync('src/site-skeleton/index.html', 'public/index.html');
 // copy svg
 fs.copyFileSync('src/site-skeleton/forkme_right_darkblue_121621.svg', 'public/forkme_right_darkblue_121621.svg');
 copyDir('img', 'public/img')
+copyDir('src/site-skeleton/fonts', 'public/fonts');
 
 // Insert articles into index.html
 let indexHtml = fs.readFileSync('public/index.html', 'utf8');
