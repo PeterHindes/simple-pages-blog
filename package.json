@@ -15,14 +15,8 @@
   ],
   "author": "Peter Hindes",
   "dependencies": {
-    "gulp-libsquoosh": "^1.1.2",
     "http-server": "^14.1.1",
     "showdown": "^2.1.0",
-    "squoosh": "^0.0.0",
     "watch": "^1.0.2"
-  },
-  "devDependencies": {
-    "@squoosh/lib": "^0.5.3",
-    "gulp": "^4.0.2"
   }
 }

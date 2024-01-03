@@ -57,6 +57,7 @@ function copyDir(src, dest) {
     });
 }
 // copyDir('src/site-skeleton', 'public');
+fs.mkdirSync('public');
 // just copy index.html
 fs.copyFileSync('src/site-skeleton/index.html', 'public/index.html');
 // copy svg
