@@ -62,6 +62,7 @@ fs.copyFileSync('src/site-skeleton/index.html', 'public/index.html');
 // copy svg
 fs.copyFileSync('src/site-skeleton/forkme_right_darkblue_121621.svg', 'public/forkme_right_darkblue_121621.svg');
 fs.copyFileSync('src/site-skeleton/favicon.ico', 'public/favicon.ico');
+fs.copyFileSync('src/site-skeleton/robots.txt', 'public/robots.txt');
 copyDir('img', 'public/img')
 copyDir('src/site-skeleton/fonts', 'public/fonts');
 
