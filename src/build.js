@@ -35,7 +35,7 @@ traverseDir('articles', (filePath) => {
 });
 
 // Sort articles in ascending order of date
-articles.sort((a, b) => a.date.join('') - b.date.join(''));
+articles.sort((a, b) => a.date.join('-') - b.date.join(''));
 // add the id of "latest" to the last div in the list
 articles[articles.length - 1].content = articles[articles.length - 1].content.replace("<div class=\"article\">", "<div class=\"article\" id=\"latest\">");
 

@@ -78,6 +78,11 @@ h2 {
     font-family: 'Cairo', normal;
 }
 
+h3 {
+    color: rgb(255, 215, 167);
+    font-family: 'Cairo', normal;
+}
+
 #header {
     background-color: rgb(39, 39, 66);
     position: sticky;
@@ -184,6 +189,7 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 15px;
 }
 
 .article-img {
