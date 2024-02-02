@@ -157,7 +157,7 @@ h3 {
 }
 
 #footer {
-    background-color: rgba(39, 39, 66, 0.4);
+    background-color: rgba(39, 39, 66, 0.8);
     position: sticky;
     bottom: 0;
     left: 0;
@@ -170,6 +170,17 @@ h3 {
 #footer a{
     color: rgb(159, 212, 128);
     text-decoration: none;
+}
+#footer p {
+    margin: 0;
+    padding: 0;
+    padding-right: 50px;
+    padding-left: 50px;
+    font-family: 'Cairo', normal;
+    font-size: 15px;
+    color: rgb(159, 212, 128);
+    width: 200px;
+    overflow: wrap;
 }
 
 #jtlbutton {

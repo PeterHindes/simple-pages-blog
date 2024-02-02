@@ -35,7 +35,11 @@ traverseDir('articles', (filePath) => {
 });
 
 // Sort articles in ascending order of date
-articles.sort((a, b) => a.date.join('-') - b.date.join(''));
+articles.sort((a, b) => {
+    let dateA = new Date(a.date[2], a.date[1] - 1, a.date[0]); // -1 because months are 0-indexed
+    let dateB = new Date(b.date[2], b.date[1] - 1, b.date[0]);
+    return dateA - dateB;
+});
 // add the id of "latest" to the last div in the list
 articles[articles.length - 1].content = articles[articles.length - 1].content.replace("<div class=\"article\">", "<div class=\"article\" id=\"latest\">");
 
