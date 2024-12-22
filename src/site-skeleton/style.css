@@ -163,9 +163,10 @@ h3 {
     left: 0;
     width: 100%;
     height: 55px;
-    display: flex;
+    display: inline-block;
+    /*display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;*/
     overflow: hidden;
 }
 #footer a{
