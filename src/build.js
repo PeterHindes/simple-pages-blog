@@ -75,7 +75,7 @@ let indexHtml = fs.readFileSync('public/index.html', 'utf8');
 let articlesHtml = articles.map(article => article.content).join('\n');
 // indexHtml = indexHtml.replace(/\n/g, '').replace(/ +/g, ' ');
 indexHtml = indexHtml.replace('<!-- placeholder -->', articlesHtml);
-indexHtml = indexHtml.replace('/*insert style*/', fs.readFileSync('src/site-skeleton/style.css', 'utf8'))
+indexHtml = indexHtml.replace('<link rel="stylesheet" href="style.css" />', "<style>"+ fs.readFileSync('src/site-skeleton/style.css', 'utf8') + "</style>")
     // .replace(/\n/g, '').replace(/ +/g, ' ')
     ;
 fs.writeFileSync('public/index.html', indexHtml);
