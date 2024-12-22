@@ -166,6 +166,7 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 #footer a{
     color: rgb(159, 212, 128);
