@@ -3,15 +3,14 @@ const path = require('path');
 const showdown  = require('showdown');
 const converter = new showdown.Converter();
 
-let articles = {};
+let trips = {};
 
 function traverseDir(dir, callback) {
     fs.readdirSync(dir).forEach(file => {
         let fullPath = path.join(dir, file);
+        callback(fullPath);
         if (fs.lstatSync(fullPath).isDirectory()) {
             traverseDir(fullPath, callback);
-        } else {
-            callback(fullPath);
         }
     });
 }
@@ -29,18 +28,25 @@ traverseDir('articles', (filePath) => {
         let dateHtml = `<h4 class="article-date">${date}</h4>`;
         html = html.replace(/<\/h1>/, `</h1>${dateHtml}`);
         html = html.replace(/<img src="(.*)" .*>/g, '<div class="img-wrap"><img src="$1" class="article-img" $2></div>');
-        articles[trip].push({date: date.split('-'), content: `<div class="article">${html}</div>` });
+        trips[trip].push({date: date.split('-'), content: `<div class="article">${html}</div>` });
+    } else if (path.dirname(filePath) === 'articles') {
+        let trip = path.basename(filePath);
+        console.log(trip);
+        trips[trip] = [];
     }
 });
 
-// Sort articles in ascending order of date
-articles.sort((a, b) => {
-    let dateA = new Date(a.date[2], a.date[1] - 1, a.date[0]); // -1 because months are 0-indexed
-    let dateB = new Date(b.date[2], b.date[1] - 1, b.date[0]);
-    return dateA - dateB;
+Object.entries(trips).forEach(([trip, articles]) => {
+    console.log(articles);
+    // Sort articles in ascending order of date
+    articles.sort((a, b) => {
+        let dateA = new Date(a.date[2], a.date[1] - 1, a.date[0]); // -1 because months are 0-indexed
+        let dateB = new Date(b.date[2], b.date[1] - 1, b.date[0]);
+        return dateA - dateB;
+    });
+    // add the id of "latest" to the last div in the list
+    articles[articles.length - 1].content = articles[articles.length - 1].content.replace("<div class=\"article\">", "<div class=\"article\" id=\"latest\">");
 });
-// add the id of "latest" to the last div in the list
-articles[articles.length - 1].content = articles[articles.length - 1].content.replace("<div class=\"article\">", "<div class=\"article\" id=\"latest\">");
 
 function copyDir(src, dest) {
     fs.mkdirSync(dest);
@@ -70,12 +76,12 @@ copyDir('src/site-skeleton/fonts', 'public/fonts');
 
 // Insert articles into index.html
 let articlesHtml = "";
-articles.forEach(trip => {
+Object.entries(trips).forEach(([trip, articles]) => {
     articlesHtml += `<label for="${trip}" class="tabHeader">${trip} Trip</label>`
-})
-articles.forEach(trip => {
+});
+Object.entries(trips).forEach(([trip, articles]) => {
     articlesHtml += `<input type="radio" id="${trip}" name="tab" />\n<div class="articles ${trip}">`;
-    articlesHtml += articles[trip].map(article => article.content).join('\n');
+    articlesHtml += articles.map(article => article.content).join('\n');
     articlesHtml += "</div>";
 });
 
