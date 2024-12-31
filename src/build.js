@@ -71,7 +71,7 @@ copyDir('src/site-skeleton/fonts', 'public/fonts');
 // Insert articles into index.html
 let articlesHtml = "";
 articles.forEach(trip => {
-    articlesHtml += `<label for="${trip}">${trip} Trip</label>`
+    articlesHtml += `<label for="${trip}" class="tabHeader">${trip} Trip</label>`
 })
 articles.forEach(trip => {
     articlesHtml += `<input type="radio" id="${trip}" name="tab" />\n<div class="articles ${trip}">`;
