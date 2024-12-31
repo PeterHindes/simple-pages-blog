@@ -3,8 +3,7 @@ const path = require('path');
 const showdown  = require('showdown');
 const converter = new showdown.Converter();
 
-let articles = [];
-
+let articles = {};
 
 function traverseDir(dir, callback) {
     fs.readdirSync(dir).forEach(file => {
@@ -21,16 +20,16 @@ traverseDir('articles', (filePath) => {
     if (path.extname(filePath) === '.md') {
         let text = fs.readFileSync(filePath, 'utf8');
         let html = converter.makeHtml(text);
-        // let date = path.dirname(filePath).split(path.sep).slice(-3).join('-'); // extract date from file path
         dateParts = filePath.split(path.sep).slice();
-        let year = dateParts[1];
-        let month = dateParts[2];
-        let day = dateParts[3].split('.')[0];
+        let trip = dateParts[1];
+        let year = dateParts[2];
+        let month = dateParts[3];
+        let day = dateParts[4].split('.')[0];
         let date = `${day}-${month}-${year}`;
         let dateHtml = `<h4 class="article-date">${date}</h4>`;
         html = html.replace(/<\/h1>/, `</h1>${dateHtml}`);
         html = html.replace(/<img src="(.*)" .*>/g, '<div class="img-wrap"><img src="$1" class="article-img" $2></div>');
-        articles.push({ date: date.split('-'), content: `<div class="article">${html}</div>` });
+        articles[trip].push({date: date.split('-'), content: `<div class="article">${html}</div>` });
     }
 });
 
@@ -43,7 +42,6 @@ articles.sort((a, b) => {
 // add the id of "latest" to the last div in the list
 articles[articles.length - 1].content = articles[articles.length - 1].content.replace("<div class=\"article\">", "<div class=\"article\" id=\"latest\">");
 
-// copy the folder src/site-skeleton to public
 function copyDir(src, dest) {
     fs.mkdirSync(dest);
     fs.readdirSync(src).forEach(file => {
@@ -56,7 +54,7 @@ function copyDir(src, dest) {
         }
     });
 }
-// copyDir('src/site-skeleton', 'public');
+
 if (fs.existsSync('public')) {
     fs.rmSync('public', { recursive: true });
 }
@@ -71,9 +69,17 @@ copyDir('img', 'public/img')
 copyDir('src/site-skeleton/fonts', 'public/fonts');
 
 // Insert articles into index.html
+let articlesHtml = "";
+articles.forEach(trip => {
+    articlesHtml += `<label for="${trip}">${trip} Trip</label>`
+})
+articles.forEach(trip => {
+    articlesHtml += `<input type="radio" id="${trip}" name="tab" />\n<div class="articles ${trip}">`;
+    articlesHtml += articles[trip].map(article => article.content).join('\n');
+    articlesHtml += "</div>";
+});
+
 let indexHtml = fs.readFileSync('public/index.html', 'utf8');
-let articlesHtml = articles.map(article => article.content).join('\n');
-// indexHtml = indexHtml.replace(/\n/g, '').replace(/ +/g, ' ');
 indexHtml = indexHtml.replace('<!-- placeholder -->', articlesHtml);
 indexHtml = indexHtml.replace('<link rel="stylesheet" href="style.css" />', "<style>"+ fs.readFileSync('src/site-skeleton/style.css', 'utf8') + "</style>")
     // .replace(/\n/g, '').replace(/ +/g, ' ')

@@ -152,7 +152,7 @@ h3 {
     justify-content: center;
 }
 
-#articles {
+.articles {
     max-width: 800px;
     display: flex;
     flex-direction: column;
