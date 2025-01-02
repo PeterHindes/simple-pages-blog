@@ -78,12 +78,13 @@ articlesHtml += '<div id="tabsContainer">';
 Object.entries(trips).forEach(([trip, articles]) => {
     articlesHtml += `<label for="${trip}" class="tabHeader">${trip} Trip</label>`
 });
-articlesHtml += '</div><br />';
+articlesHtml += '</div>\n<div id="articlesContainer">\n';
 Object.entries(trips).forEach(([trip, articles]) => {
     articlesHtml += `<input type="radio" id="${trip}" name="tab" />\n<div class="articles ${trip}">`;
     articlesHtml += articles.map(article => article.content).join('\n');
     articlesHtml += "</div>";
 });
+articlesHtml += "</div>";
 
 let indexHtml = fs.readFileSync('public/index.html', 'utf8');
 indexHtml = indexHtml.replace('<!-- placeholder -->', articlesHtml);

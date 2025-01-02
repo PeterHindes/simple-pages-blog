@@ -10,9 +10,9 @@
         window.onload = function () {
             // If we scroll to #latest then hide the button
             function updateFooter() {
-                if (window.location.hash == '#latest') {
-                    document.getElementById("footer").style.display = 'none';
-                }
+                // if (window.location.hash == '#latest') {
+                //     document.getElementById("footer").style.display = 'none';
+                // }
             }
             window.onhashchange = updateFooter;
             updateFooter();
@@ -71,14 +71,16 @@
     <div id="content">
         <!-- placeholder -->
         <!-- comment this out begin
-        actually dont comment it out if testing -->
+        actually dont comment it out if testing --
         <div id="tabsContainer">
           <label for="${trip}" class="tabHeader">${trip} Trip</label>
         </div><br />
         
-        <input type="radio" id="${trip}" name="tab" />
-        <div class="articles ${trip}">
-         <h1>Test Title without date</h1>
+        <div id="articlesContainer">
+            <input type="radio" id="${trip}" name="tab" />
+            <div class="articles ${trip}">
+            <h1>Test Title without date</h1>
+            </div>
         </div>
         <!-- comment this out end -->
     </div>
