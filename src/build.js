@@ -31,13 +31,11 @@ traverseDir('articles', (filePath) => {
         trips[trip].push({date: date.split('-'), content: `<div class="article">${html}</div>` });
     } else if (path.dirname(filePath) === 'articles') {
         let trip = path.basename(filePath);
-        console.log(trip);
         trips[trip] = [];
     }
 });
 
 Object.entries(trips).forEach(([trip, articles]) => {
-    console.log(articles);
     // Sort articles in ascending order of date
     articles.sort((a, b) => {
         let dateA = new Date(a.date[2], a.date[1] - 1, a.date[0]); // -1 because months are 0-indexed
@@ -76,9 +74,11 @@ copyDir('src/site-skeleton/fonts', 'public/fonts');
 
 // Insert articles into index.html
 let articlesHtml = "";
+articlesHtml += '<div id="tabsContainer">';
 Object.entries(trips).forEach(([trip, articles]) => {
     articlesHtml += `<label for="${trip}" class="tabHeader">${trip} Trip</label>`
 });
+articlesHtml += '</div><br />';
 Object.entries(trips).forEach(([trip, articles]) => {
     articlesHtml += `<input type="radio" id="${trip}" name="tab" />\n<div class="articles ${trip}">`;
     articlesHtml += articles.map(article => article.content).join('\n');

@@ -41,6 +41,24 @@
                 });
         }
     </script>
+    <script>
+        document.getElementsByName("tab").forEach(element => {
+            element.addEventListener("change", function() {
+                if (this.checked) {
+                    // Remove activeTab class from all labels first
+                    document.querySelectorAll("label").forEach(label => {
+                        label.classList.remove("activeTab");
+                    });
+                    
+                    // Add activeTab class to the label that matches this input's id
+                    const correspondingLabel = document.querySelector(`label[for="${this.id}"]`);
+                    if (correspondingLabel) {
+                        correspondingLabel.classList.add("activeTab");
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -52,6 +70,17 @@
     </div>
     <div id="content">
         <!-- placeholder -->
+        <!-- comment this out begin
+        actually dont comment it out if testing -->
+        <div id="tabsContainer">
+          <label for="${trip}" class="tabHeader">${trip} Trip</label>
+        </div><br />
+        
+        <input type="radio" id="${trip}" name="tab" />
+        <div class="articles ${trip}">
+         <h1>Test Title without date</h1>
+        </div>
+        <!-- comment this out end -->
     </div>
     <div id="footer">
         <div id="leftfooter">

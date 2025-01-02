@@ -15,8 +15,8 @@
   ],
   "author": "Peter Hindes",
   "dependencies": {
-    "http-server": "^14.1.1",
-    "showdown": "^2.1.0",
-    "watch": "^1.0.2"
+    "http-server": "*",
+    "showdown": "*",
+    "watch": "*"
   }
 }

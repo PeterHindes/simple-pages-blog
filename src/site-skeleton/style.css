@@ -90,6 +90,7 @@ h3 {
     left: 0;
     width: 100%;
     height: 55px;
+    text-transform: capitalize;
 }
 
 #header-title {
@@ -150,13 +151,30 @@ h3 {
     width: 100vw;
     display: flex;
     justify-content: center;
+    min-height: 100vh;
 }
 
+#tabsContainer {
+    background-color: rgba(100,0,0,100);
+    position: sticky;
+    top: 55px;
+    width: 100vw;
+    height: calc(1em+10px);
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+}
 .tabHeader {
+    margin: 4px;
     padding: 4px;
     border-radius: 3px;
     box-shadow: 5px;
     border-width: 2px;
+    background-color: blue;
+    flex-direction: row;
+}
+.tabHeader.activeTab {
+    background-color: purple !important;
 }
 
 input {
@@ -181,7 +199,7 @@ input:checked+div.articles {
     position: sticky;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 55px;
     display: inline-block;
     display: flex;
